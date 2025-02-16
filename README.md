@@ -5,11 +5,17 @@ Create a top navigation bar entirely in the browser
 [synthetic demo](/client-topnav/demo/nested1/)   
 [real world usage](http://lesitedela104.webredirect.org/104/le-roman-de-renart/) (page in french)
 ## try it yourself
-``git clone 
+```cmd
+  git clone https://github.com/xpeuvr327/client-topnav.git  
+  cd client-topnav/demo
+  python -m http.server
+```
+then go to [http://localhost:8000/](http://localhost:8000/)  
+or open it in your browser
 
 # usage
-modify navigations items and add
-``<script src="header.js"></script>`` to your html page (anywhere).
+modify navigations items and paste
+``<script src="header.js"></script>`` in your html page (anywhere).
 
 # todos
 - remove 404.js (or move to separate script) - it replaces all a (link) elements and redirects to a 404, even on a serverless environment
