@@ -11,7 +11,7 @@ Create a top navigation bar entirely in the browser
   python -m http.server
 ```
 then go to [http://localhost:8000/](http://localhost:8000/)  
-or open it in your browser
+or open demo folder in your browser
 
 # usage
 modify navigations items and paste
