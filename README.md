@@ -2,7 +2,7 @@
 Create a top navigation bar entirely in the browser
 
 # demo
-[synthetic demo](/client-topnav/demo/nested1/)   
+[synthetic demo](https://xpeuvr327.github.io/client-topnav/demo/nested1/)   
 [real world usage](http://lesitedela104.webredirect.org/104/le-roman-de-renart/) (page in french)
 ## try it yourself
 ```cmd
