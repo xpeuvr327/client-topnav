@@ -6,9 +6,9 @@ Create a top navigation bar entirely in the browser
 [real world usage](http://lesitedela104.webredirect.org/104/le-roman-de-renart/) (page in french)
 ## try it yourself
 ```cmd
-  git clone https://github.com/xpeuvr327/client-topnav.git  
-  cd client-topnav/demo
-  python -m http.server
+git clone https://github.com/xpeuvr327/client-topnav.git  
+cd client-topnav/demo
+python -m http.server
 ```
 then go to [http://localhost:8000/](http://localhost:8000/)  
 or open demo folder in your browser
