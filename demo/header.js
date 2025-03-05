@@ -45,7 +45,6 @@ function createNavHTML() {
 const { item: currentItem, chapterItem } = getCurrentPageInfo();
 const currentTitle = chapterItem ? chapterItem.text : (currentItem ? currentItem.text : document.title);
 
-
 let navItems = navigationItems.map(item => {
     const isActive = item === currentItem || (chapterItem && item.chapters?.some(ch => ch === chapterItem));
     const hasDropdown = item.chapters && item.chapters.length > 0;
@@ -83,17 +82,8 @@ const navList = document.querySelector('.nav-list');
 navList.classList.toggle('show');
 }
 
-function injectNav() {
-const navHTML = createNavHTML();
-document.body.insertBefore(
-new DOMParser().parseFromString(navHTML, 'text/html').body.firstChild,
-document.body.firstChild
-);
-}//dont know if that should be a feature
-
 document.addEventListener('DOMContentLoaded', function() {
 injectCSS();
-injectNav();
 }); 
 
 const currentUrl = window.location.href.split('#')[0];
@@ -120,77 +110,3 @@ function getChapterNavigation() {
         next: nextChapter
     };
 }
-
-function addChapterNavigation() {
-    const nav = getChapterNavigation();
-    const navHTML = document.createElement('div');
-        // Check if the current path is in the chapters array of navigation items
-        const chapters = navigationItems.find(item => item.href === "chapitres.html").chapters;
-        const isChapterPage = chapters.some(chapter =>
-            currentPath === chapter.href || currentUrl.endsWith(chapter.href)
-        );
-    
-        if (!isChapterPage) {
-            return;
-        }
-    navHTML.style.cssText = `
-        display: flex;
-        justify-content: space-between;
-        margin: 20px 0;
-        padding: 10px;
-        gap: 10px;
-    `;
-    
-    const buttonStyle = `
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #2c3e50;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-        font-family: Arial, sans-serif;
-        user-select:none;
-    `;
-    
-    // Add navigation links
-    navHTML.innerHTML = `
-        ${nav.prev ? `<a href="${nav.prev.href}" style="${buttonStyle}"id="chapNavPrev">← ${nav.prev.text}</a>` : '<span></span>'}
-        ${nav.next ? `<a href="${nav.next.href}" style="${buttonStyle}" id="chapNavNext">${nav.next.text} →</a>` : ''}
-    `;
-    
-    // Add hover effect
-    const links = navHTML.getElementsByTagName('a');
-    Array.from(links).forEach(link => {
-        link.onmouseover = () => link.style.backgroundColor = '#1abc9c';
-        link.onmouseout = () => link.style.backgroundColor = '#2c3e50';
-    });
-    
-    const content = document.getElementById('content');
-    if (content) {
-        content.appendChild(navHTML);
-    }
-}
-//adds a 404 but that should also be in a separate file
-window.addEventListener('load', function() {
-    addChapterNavigation();
-        document.querySelectorAll('a').forEach(anchor => {
-            anchor.addEventListener('click', async function(event) {
-                event.preventDefault();
-    
-                const href = anchor.getAttribute('href');
-                if (!href) return; 
-    
-                try {
-                    const response = await fetch(href);
-                    if (response.ok) {
-                        window.location.href = href;
-                    } else {
-                        window.location.href = '/404.html';
-                    }
-                } catch (error) {
-                    window.location.href = '/404.html';
-                }
-            });
-        });
-});
